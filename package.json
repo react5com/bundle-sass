@@ -1,0 +1,27 @@
+{
+  "name": "@react5/bundle-sass",
+  "version": "0.5.2",
+  "description": "A rollup plugin to bundle sass, scss, css files and apply postcss processing.",
+  "keywords": [
+    "rollup",
+    "scss",
+    "sass",
+    "css",
+    "rollup plugin"
+  ],
+  "dependencies": {
+    "postcss": "^8.5.1",
+    "sass-embedded": "^1.83.4"    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:react5com/bundle-sass.git"
+  },
+  "license": "MIT",
+  "author": "react5",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
