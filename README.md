@@ -8,8 +8,10 @@ plugins: [
   bundleSass({
     copyFonts: true,
     postfixOptions: {
-      plugins: [],
-      use: []
+      plugins: [
+        autoprefixer(), 
+        production && cssnano()],
+      use: ["@use 'sass:color';"]
     }
   ...
 ]

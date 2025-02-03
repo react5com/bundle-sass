@@ -8,12 +8,14 @@ function getFilePriority(fileName) {
   if (fileName.includes('design-system')) return 1;
   return 2;
 }
-function compareFiles(a, b) {
+export function compareFiles(a, b) {
   const priorityDiff = getFilePriority(a.id) - getFilePriority(b.id);
   if (priorityDiff !== 0) {
     return priorityDiff;
   }
-  return a.id.localeCompare(b.id);
+  const nameA = path.basename(a.id);
+  const nameB = path.basename(b.id);
+  return nameA.localeCompare(nameB);
 }
 function copyFontFolders(emitFile) {
   return async function (fontImport) {
@@ -64,11 +66,10 @@ export default function bundleSass({ output, noOutput = false, copyFonts = false
       );
       await fs.mkdir(path.dirname(outputPath), { recursive: true });
 
-      const uniqueFiles = Array.from(files).sort(compareFiles);
+      const uniqueFiles = Array.from(files);
+      uniqueFiles.sort(compareFiles);
 
-      const scssDeclarations = `@use 'sass:color';\n`;
-      const bundledContent = scssDeclarations 
-        + use.join('\n')
+      const bundledContent = use.join('\n')
         + uniqueFiles.map((file) => file.content).join('\n');
       //await fs.writeFile(outputPath, bundledContent);
       this.emitFile({
